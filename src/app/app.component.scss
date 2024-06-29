@@ -1,0 +1,63 @@
+@import "responsiveness";
+
+:host {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  background-color: #bbb;
+  grid-template-areas:
+    "map"
+    "."
+    "guesser";
+  grid-template-rows: auto 1fr 4rem;
+  grid-template-columns: 100vw;
+
+  & > .map {
+    grid-area: map;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  & > .guesser {
+    grid-area: guesser;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    justify-content: center;
+    align-items: center;
+
+    & > span {
+      font-size: 1.55rem;
+      font-weight: 700;
+    }
+
+    & > input {
+      font-size: 1.5rem;
+      background-color: #eeeeee;
+      outline: none;
+      border: 1px solid black;
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      width: 25%;
+      text-align: center;
+    }
+  }
+
+  & > .timer {
+    grid-area: timer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 4rem;
+  }
+
+  @include for-tablet-landscape-up {
+    grid-template-areas:
+      ". . ."
+      ". map ."
+      ". guesser timer";
+    grid-template-rows: 10vh 80vh 10vh;
+    grid-template-columns: 10vw 80vw 10vw;
+  }
+}
