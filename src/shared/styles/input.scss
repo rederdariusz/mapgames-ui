@@ -1,0 +1,14 @@
+input {
+  font-size: 1.5rem;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  border-bottom: 0.25rem solid black;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+input::placeholder {
+  color: #222;
+}

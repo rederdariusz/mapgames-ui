@@ -17,9 +17,7 @@ export class EuropeComponent implements IGuessable {
   private _svg = viewChild.required<ElementRef>('svg');
 
   public guess(country: string): boolean {
-    let path = this._svg().nativeElement.querySelector(
-      `[name="${country.toLocaleLowerCase()}"]`
-    );
+    let path = this._svg().nativeElement.querySelector(`[name="${country}"]`);
 
     if (!path) return false;
 

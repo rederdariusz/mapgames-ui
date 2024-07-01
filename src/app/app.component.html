@@ -1,11 +1,20 @@
 <section class="map">
   <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
 </section>
+
 <section class="guesser">
-  <span>TYPE COUNTRY NAME </span>
-  <input type="text" [formControl]="guesser" autofocus />
+  <input
+    type="text"
+    [formControl]="guesser"
+    autofocus
+    placeholder="Type country name here..."
+  />
 </section>
 
+@if(game.running) {
 <section class="timer">
-  {{ time.minutes }}:{{time.seconds}}
+  {{ game.time.minutes > 0 ? game.time.minutes + ":" : ""
+  }}{{ game.time.minutes > 0 && game.time.seconds < 10 ? "0" : ""
+  }}{{ game.time.seconds }}
 </section>
+}

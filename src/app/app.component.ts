@@ -10,6 +10,7 @@ import { EuropeComponent } from './europe/europe.component';
 import { IGuessable } from '../shared/interfaces/guessable.interface';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { Game } from './game.class';
 
 @Component({
   selector: 'root',
@@ -21,33 +22,25 @@ import { DatePipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  private _country!: IGuessable;
-  private _timer!: any;
   private _cdRef = inject(ChangeDetectorRef);
 
+  public game = new Game();
   public guesser = new FormControl('', { nonNullable: true });
-  public time: { minutes: number; seconds: number } = {
-    minutes: 0,
-    seconds: 0,
-  };
 
   public ngOnInit(): void {
-    this._timer = setInterval(() => {
-      this.time.seconds++;
-      if (this.time.seconds > 59) {
-        this.time.minutes++;
-        this.time.seconds = 0;
-      }
+    this.game.start();
+
+    this.game.change.subscribe(() => {
       this._cdRef.markForCheck();
-    }, 1000);
+    })
 
     this.guesser.valueChanges.subscribe((guess) => {
-      let guessed = this._country.guess(guess);
+      let guessed = this.game.guess(guess);
       if (guessed) this.guesser.setValue('');
     });
   }
 
   public onRouterOutletActivate(component: IGuessable) {
-    this._country = component;
+    this.game.map = component;
   }
 }

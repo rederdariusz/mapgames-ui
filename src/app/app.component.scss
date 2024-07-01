@@ -32,13 +32,8 @@
     }
 
     & > input {
+      width: 30rem;
       font-size: 1.5rem;
-      background-color: #eeeeee;
-      outline: none;
-      border: 1px solid black;
-      border-radius: 0.75rem;
-      padding: 0.75rem 1rem;
-      width: 25%;
       text-align: center;
     }
   }
@@ -54,10 +49,11 @@
 
   @include for-tablet-landscape-up {
     grid-template-areas:
-      ". . ."
+      ". guesser ."
       ". map ."
-      ". guesser timer";
-    grid-template-rows: 10vh 80vh 10vh;
+      ". map timer"
+      ". . timer";
+    grid-template-rows: 15vh 70vh 10vh 5vh;
     grid-template-columns: 10vw 80vw 10vw;
   }
 }
