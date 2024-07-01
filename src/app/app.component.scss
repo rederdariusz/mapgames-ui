@@ -76,7 +76,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      font-size: 4rem;
+      font-size: 3rem;
 
       & > span {
         font-size: 1.25rem;
@@ -87,7 +87,7 @@
   @include for-tablet-landscape-up {
     grid-template-areas: "panel map";
     grid-template-rows: 100vh;
-    grid-template-columns: 15vw 85vw;
+    grid-template-columns: 20rem 1fr;
 
     & > .map {
       & > .name {

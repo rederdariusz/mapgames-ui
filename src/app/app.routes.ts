@@ -7,4 +7,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./europe/europe.component').then((e) => e.EuropeComponent),
   },
+  {
+    path: 'africa',
+    loadComponent: () =>
+      import('./africa/africa.component').then((e) => e.AfricaComponent),
+  },
 ];
