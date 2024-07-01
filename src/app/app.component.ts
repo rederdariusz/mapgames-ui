@@ -7,15 +7,21 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { EuropeComponent } from './europe/europe.component';
-import { IGuessable } from '../shared/interfaces/guessable.interface';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import { Game } from './game.class';
+import { Map } from '../shared/abstracts/map.class';
 
 @Component({
   selector: 'root',
   standalone: true,
-  imports: [RouterOutlet, EuropeComponent, ReactiveFormsModule, DatePipe],
+  imports: [
+    RouterOutlet,
+    EuropeComponent,
+    ReactiveFormsModule,
+    DatePipe,
+    TitleCasePipe,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -27,12 +33,16 @@ export class AppComponent {
   public game = new Game();
   public guesser = new FormControl('', { nonNullable: true });
 
+  public get guessed(): string[] {
+    return this.game.guessed.slice().reverse();
+  }
+
   public ngOnInit(): void {
     this.game.start();
 
     this.game.change.subscribe(() => {
       this._cdRef.markForCheck();
-    })
+    });
 
     this.guesser.valueChanges.subscribe((guess) => {
       let guessed = this.game.guess(guess);
@@ -40,7 +50,7 @@ export class AppComponent {
     });
   }
 
-  public onRouterOutletActivate(component: IGuessable) {
+  public onRouterOutletActivate(component: Map) {
     this.game.map = component;
   }
 }

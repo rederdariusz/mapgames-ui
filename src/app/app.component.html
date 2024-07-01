@@ -1,20 +1,34 @@
+<section class="panel">
+  <section class="guesser">
+    <input
+      type="text"
+      [formControl]="guesser"
+      autofocus
+      placeholder="Type country name here..."
+    />
+  </section>
+  <section class="history">
+    @for (country of guessed; track $index) {
+    <div>{{ country | titlecase }}</div>
+    }
+  </section>
+
+  <section class="timer">
+    <span>Timer: </span>
+    {{ game.time.minutes > 0 ? game.time.minutes + ":" : ""
+    }}{{ game.time.minutes > 0 && game.time.seconds < 10 ? "0" : ""
+    }}{{ game.time.seconds }}
+  </section>
+</section>
+
 <section class="map">
   <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
-</section>
 
-<section class="guesser">
-  <input
-    type="text"
-    [formControl]="guesser"
-    autofocus
-    placeholder="Type country name here..."
-  />
+  @if (game.map) {
+  <span class="name"
+    >{{ game.map.name }} {{ game.guessed.length }}/{{
+      game.map.countries.length
+    }}</span
+  >
+  }
 </section>
-
-@if(game.running) {
-<section class="timer">
-  {{ game.time.minutes > 0 ? game.time.minutes + ":" : ""
-  }}{{ game.time.minutes > 0 && game.time.seconds < 10 ? "0" : ""
-  }}{{ game.time.seconds }}
-</section>
-}

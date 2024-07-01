@@ -1,16 +1,25 @@
-import { ChangeDetectorRef, EventEmitter } from '@angular/core';
-import { IGuessable } from '../shared/interfaces/guessable.interface';
+import { EventEmitter } from '@angular/core';
+import { Map } from '../shared/abstracts/map.class';
 
 export class Game {
   private _timer!: any; // interval
 
   public running: boolean = false;
   public time: Time = new Time();
-  public map!: IGuessable;
+  public map?: Map;
+  public guessed: string[] = [];
+
+  // events
   public change = new EventEmitter();
 
   public guess(country: string): boolean {
-    return this.map.guess(country.toLocaleLowerCase());
+    let guess = country.toLocaleLowerCase();
+    if (this.guessed.includes(guess)) return false;
+
+    let guessed = this.map!.guess(guess);
+    if (guessed) this.guessed.push(guess);
+    if (this.allGuessed()) this.stop();
+    return guessed;
   }
 
   public start(): void {
@@ -19,10 +28,14 @@ export class Game {
     this.change.emit();
   }
 
-  private stop(): void {
+  public stop(): void {
     this.stopTimer();
     this.running = false;
     this.change.emit();
+  }
+
+  public allGuessed(): boolean {
+    return this.map!.countries.length === this.guessed.length;
   }
 
   private startTimer(): void {
@@ -41,6 +54,9 @@ export class Game {
 
   private stopTimer(): void {
     clearInterval(this._timer);
+  }
+
+  private clearTimer(): void {
     this.time = new Time();
   }
 }

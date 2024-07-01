@@ -2,9 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  OnInit,
   viewChild,
 } from '@angular/core';
-import { IGuessable } from '../../shared/interfaces/guessable.interface';
+import { Map } from '../../shared/abstracts/map.class';
 
 @Component({
   selector: 'europe',
@@ -13,12 +14,21 @@ import { IGuessable } from '../../shared/interfaces/guessable.interface';
   styleUrl: './europe.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EuropeComponent implements IGuessable {
+export class EuropeComponent extends Map implements OnInit {
   private _svg = viewChild.required<ElementRef>('svg');
 
-  public guess(country: string): boolean {
-    let path = this._svg().nativeElement.querySelector(`[name="${country}"]`);
+  constructor() {
+    super('Europe', []);
+  }
 
+  public ngOnInit(): void {
+    this.countries = [
+      ...this._svg().nativeElement.getElementsByTagName('path'),
+    ].map((p) => p.getAttribute('name'));
+  }
+
+  public override guess(country: string): boolean {
+    let path = this._svg().nativeElement.querySelector(`[name="${country}"]`);
     if (!path) return false;
 
     path.style.fill = '#06c258';

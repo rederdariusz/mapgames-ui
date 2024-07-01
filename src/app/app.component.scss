@@ -7,53 +7,108 @@
   background-color: #bbb;
   grid-template-areas:
     "map"
-    "."
-    "guesser";
-  grid-template-rows: auto 1fr 4rem;
+    "panel";
+  grid-template-rows: auto 1fr;
   grid-template-columns: 100vw;
 
   & > .map {
     grid-area: map;
     display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  & > .guesser {
-    grid-area: guesser;
-    display: flex;
     flex-direction: column;
-    gap: 0.25rem;
     justify-content: center;
     align-items: center;
+    position: relative;
 
-    & > span {
-      font-size: 1.55rem;
-      font-weight: 700;
-    }
-
-    & > input {
-      width: 30rem;
+    & > .name {
       font-size: 1.5rem;
-      text-align: center;
+      font-family: "MontserratLight", sans-serif;
     }
   }
 
-  & > .timer {
-    grid-area: timer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 4rem;
+  & > .panel {
+    grid-area: panel;
+    display: grid;
+    grid-template-areas:
+      "guesser"
+      "guessed"
+      "timer";
+    grid-template-rows: 8rem 1fr 8rem;
+    grid-template-columns: 100%;
+    background-color: #aaa;
+    & > .guesser {
+      grid-area: guesser;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      justify-content: center;
+      align-items: center;
+      background-color: #aaa;
+
+      & > span {
+        font-size: 1.55rem;
+        font-weight: 700;
+      }
+
+      & > input {
+        font-size: 1.25rem;
+        text-align: center;
+        width: 80%;
+      }
+    }
+
+    & > .history {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-block: 2rem;
+      row-gap: 1rem;
+      overflow: hidden;
+
+      & > div {
+        font-size: 1.25rem;
+      }
+    }
+
+    & > .timer {
+      grid-area: timer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 4rem;
+
+      & > span {
+        font-size: 1.25rem;
+      }
+    }
   }
 
   @include for-tablet-landscape-up {
-    grid-template-areas:
-      ". guesser ."
-      ". map ."
-      ". map timer"
-      ". . timer";
-    grid-template-rows: 15vh 70vh 10vh 5vh;
-    grid-template-columns: 10vw 80vw 10vw;
+    grid-template-areas: "panel map";
+    grid-template-rows: 100vh;
+    grid-template-columns: 15vw 85vw;
+
+    & > .map {
+      & > .name {
+        display: block;
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        font-size: 3rem;
+      }
+    }
+    & > .panel {
+      grid-template-areas:
+        "timer"
+        "guessed"
+        "guesser";
+      grid-template-rows: 8rem 1fr 8rem;
+      grid-template-columns: 100%;
+
+      & > .history {
+        flex-direction: column-reverse;
+      }
+    }
   }
 }
