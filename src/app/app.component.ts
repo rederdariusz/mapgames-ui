@@ -11,6 +11,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { Game } from './game.class';
 import { Map } from '../shared/abstracts/map.class';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'root',
@@ -29,6 +30,7 @@ import { Map } from '../shared/abstracts/map.class';
 })
 export class AppComponent {
   private _cdRef = inject(ChangeDetectorRef);
+  private _title = inject(Title);
 
   public game = new Game();
   public guesser = new FormControl('', { nonNullable: true });
@@ -52,5 +54,6 @@ export class AppComponent {
 
   public onRouterOutletActivate(component: Map) {
     this.game.map = component;
+    this._title.setTitle('MapGames | ' + this.game.map.name);
   }
 }
