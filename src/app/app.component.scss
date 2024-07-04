@@ -96,7 +96,7 @@
     & > footer {
       grid-template-areas: "name timer counter";
       grid-template-rows: 1fr;
-      grid-template-columns: auto 1fr 20rem;
+      grid-template-columns: auto 1fr auto;
       & > .name,
       .counter,
       .timer {
@@ -117,6 +117,7 @@
 
       & > .counter {
         grid-area: counter;
+        min-width: none;width: 20rem;
       }
     }
   }
