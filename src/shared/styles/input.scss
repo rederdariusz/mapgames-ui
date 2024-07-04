@@ -1,15 +1,18 @@
+@import "colors";
+
 input {
   background-color: transparent;
   outline: none;
   border: 0;
-  border-bottom: 0.06125rem solid black;
+  border-bottom: 0.05rem solid $font;
+  color: $font;
   padding: 0.75rem 1rem;
   text-align: center;
   font-family: "MontserratLight", sans-serif;
 }
 
 input::placeholder {
-  color: #222;
+  color: #BBB;
   font-size: 1.125rem;
-  font-family: 'MontserratLight', sans-serif;
+  font-family: "MontserratLight", sans-serif;
 }

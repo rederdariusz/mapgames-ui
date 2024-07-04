@@ -1,4 +1,5 @@
 @import "input";
+@import "colors";
 
 @font-face {
   font-family: "Montserrat";
@@ -9,6 +10,11 @@
   src: url("../public/fonts/Montserrat-Light.ttf");
 }
 
+@font-face {
+  font-family: "Icons";
+  src: url("../public/fonts/Icons.ttf");
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -17,8 +23,14 @@ body {
   max-width: 100vw;
   max-height: 100vh;
   font-family: "MontserratLight", sans-serif;
+  background: $background;
+  color: $font;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.icon {
+  font-family: "Icons", sans-serif;
 }
