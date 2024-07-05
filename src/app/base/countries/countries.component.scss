@@ -1,0 +1,138 @@
+@import "responsiveness";
+@import "colors";
+
+:host {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "map"
+    "panel";
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 100vw;
+
+  & > nav {
+    grid-area: nav;
+    display: grid;
+
+    & > .back {
+      grid-area: back;
+      cursor: pointer;
+    }
+
+    & > .counter {
+      grid-area: counter;
+    }
+  }
+
+  & > .map {
+    grid-area: map;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & > .panel {
+    grid-area: panel;
+    display: grid;
+
+    & > .guesser {
+      grid-area: guesser;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      justify-content: center;
+      align-items: center;
+
+      & > span {
+        font-size: 1.55rem;
+        font-weight: 700;
+      }
+
+      & > input {
+        font-size: 1.25rem;
+        text-align: center;
+        width: 80%;
+      }
+    }
+  }
+
+  & > footer {
+    grid-area: footer;
+    display: grid;
+
+    & > .name {
+      grid-area: name;
+      font-size: 1.5rem;
+      font-family: "MontserratLight", sans-serif;
+    }
+
+    & > .timer {
+      grid-area: timer;
+    }
+  }
+
+  @include for-tablet-landscape-up {
+    grid-template-areas:
+      "nav panel"
+      "map panel"
+      "footer footer";
+    grid-template-rows: 5vh 90vh 5vh;
+    grid-template-columns: 1fr 20rem;
+
+    & > nav {
+      grid-template-areas: "back counter";
+      grid-template-rows: 1fr;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+
+      & > .back {
+        margin-inline: 2rem;
+        font-size: 2vh;
+      }
+      .counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3.5vh;
+      }
+    }
+
+    & > .panel {
+      grid-template-areas:
+        "."
+        "guesser";
+      grid-template-rows: 1fr auto;
+      grid-template-columns: 1fr;
+    }
+
+    & > footer {
+      grid-template-areas: "name info timer";
+      grid-template-rows: 1fr;
+      grid-template-columns: auto 1fr auto;
+      & > .name,
+      .timer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3.5vh;
+      }
+
+      & > .name {
+        padding-inline: 2rem;
+      }
+
+      & > .info {
+        color: $font-darker;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      & > .timer {
+        min-width: 20rem;
+      }
+    }
+  }
+}

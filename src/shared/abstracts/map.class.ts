@@ -2,11 +2,11 @@ import { IGuessable } from '../interfaces/guessable.interface';
 
 export abstract class Map implements IGuessable {
   public name: string = '';
-  public countries: string[] = [];
+  public toguess: string[] = [];
 
-  constructor(name: string, countries: string[]) {
+  constructor(name: string, toguess: string[]) {
     this.name = name;
-    this.countries = countries;
+    this.toguess = toguess;
   }
 
   public guess(country: string): boolean {

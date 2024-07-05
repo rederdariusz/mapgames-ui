@@ -35,7 +35,7 @@ export class Game {
   }
 
   public allGuessed(): boolean {
-    return this.map!.countries.length === this.guessed.length;
+    return this.map!.toguess.length === this.guessed.length;
   }
 
   private startTimer(): void {
