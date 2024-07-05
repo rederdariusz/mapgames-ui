@@ -16,7 +16,12 @@
     display: grid;
 
     & > .back {
+      grid-area: back;
       cursor: pointer;
+    }
+
+    & > .counter {
+      grid-area: counter;
     }
   }
 
@@ -26,7 +31,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
   }
 
   & > .panel {
@@ -59,8 +63,13 @@
     display: grid;
 
     & > .name {
+      grid-area: name;
       font-size: 1.5rem;
       font-family: "MontserratLight", sans-serif;
+    }
+
+    & > .timer {
+      grid-area: timer;
     }
   }
 
@@ -73,15 +82,20 @@
     grid-template-columns: 1fr 20rem;
 
     & > nav {
-      grid-template-areas: "back .";
+      grid-template-areas: "back counter";
       grid-template-rows: 1fr;
       grid-template-columns: auto 1fr;
       align-items: center;
 
       & > .back {
-        grid-area: back;
         margin-inline: 2rem;
         font-size: 2vh;
+      }
+      .counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3.5vh;
       }
     }
 
@@ -94,11 +108,10 @@
     }
 
     & > footer {
-      grid-template-areas: "name timer counter";
+      grid-template-areas: "name info timer";
       grid-template-rows: 1fr;
       grid-template-columns: auto 1fr auto;
       & > .name,
-      .counter,
       .timer {
         display: flex;
         justify-content: center;
@@ -107,17 +120,18 @@
       }
 
       & > .name {
-        grid-area: name;
         padding-inline: 2rem;
       }
 
-      .timer {
-        grid-area: timer;
+      & > .info {
+        color: $font-darker;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
-      & > .counter {
-        grid-area: counter;
-        min-width: none;width: 20rem;
+      & > .timer {
+        min-width: 20rem;
       }
     }
   }

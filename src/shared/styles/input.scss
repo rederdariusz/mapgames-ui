@@ -12,7 +12,7 @@ input {
 }
 
 input::placeholder {
-  color: #BBB;
+  color: $font-darker;
   font-size: 1.125rem;
   font-family: "MontserratLight", sans-serif;
 }
